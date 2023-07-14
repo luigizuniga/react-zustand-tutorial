@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { shallow } from "zustand/shallow";
+import { useBookStore } from "./store/bookStore";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  // Acceder al stado de las propiedades
+  // const amount = useBookStore(state => state.amount);
+  // const title = useBookStore(state => state.title);
+  // const { amount, title } = useBookStore(
+  //   (state)=>({ 
+  //       amount: state.amount,
+  //       title: state.title,
+  //     }), shallow
+  //   );
 
+  const amount = useBookStore(state => state.amount);
+  const title = useBookStore(state => state.title);
+  const updateAmount = useBookStore( state => state.updateAmount );
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h2>Title : { title }</h2>
+      <h3>Books: { amount }</h3>
+      <button
+        onClick={ () => updateAmount(10) }
+      > Update Amount </button>
     </>
   )
 }
 
-export default App
+export default App;
